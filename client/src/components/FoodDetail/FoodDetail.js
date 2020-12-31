@@ -9,7 +9,7 @@ const FoodDetail = (props) => {
   const [quantityCount, setQuantityCount] = useState(1)
   const [currentItemTotalPrice, setCurrentItemTotalPrice] = useState(price)
 
-  //dynamically show images
+  // dynamically show images
   const images = require.context('../../images', true)
   const imagePath = images(`./${category.toLowerCase()}/${imgName}`)
 

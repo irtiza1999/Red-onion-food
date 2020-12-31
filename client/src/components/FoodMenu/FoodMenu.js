@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from 'react'
-import './FoodMenu.css'
 import { Nav, Row, Col, Container, Button, Alert } from 'react-bootstrap'
 import Food from '../Food/Food'
 import './FoodMenu.css'
 import FoodDetail from '../FoodDetail/FoodDetail'
-// import Delivery from '../Delivery/Delivery'
-// import CartItem from '../CartItem/CartItem'
-// import { Elements } from '@stripe/react-stripe-js'
-// import { loadStripe } from '@stripe/stripe-js'
-// import CheckoutForm from '../Payment/CheckoutForm'
+import Delivery from '../Delivery/Delivery'
+import CartItem from '../CartItem/CartItem'
+import { Elements } from '@stripe/react-stripe-js'
+import { loadStripe } from '@stripe/stripe-js'
+import CheckoutForm from '../Payment/CheckoutForm'
 import Login from '../Login/Login'
 import { useAuth } from '../Login/useAuth'
 
@@ -24,7 +23,9 @@ const FoodMenu = () => {
 
   const auth = useAuth()
 
-  //   const stripePromise = loadStripe('pk_test_Qxc5rcBn8snxoC7d0Xm7tlGi00eXYINh85')
+  const stripePromise = loadStripe(
+    'pk_test_51HubhJHonQARCwkeqhDsoRgvql1fz9wDOl3tY2LwQ67mYp06UBDvNAJ45pS3Zffa2rIJMt22ATNLieFUq8OzDDfS00IB1GOyfL'
+  )
 
   // load data
   useEffect(() => {
@@ -91,30 +92,30 @@ const FoodMenu = () => {
     }
   }
 
-  //   const handlePlaceOrder = (payment) => {
-  //     const orderDetail = {
-  //       email: deliveryInformation.email,
-  //       cart: { cart },
-  //       shipment: deliveryInformation,
-  //       payment: payment,
-  //     }
+  const handlePlaceOrder = (payment) => {
+    const orderDetail = {
+      email: deliveryInformation.email,
+      cart: { cart },
+      shipment: deliveryInformation,
+      payment: payment,
+    }
 
-  //     fetch('https://red-onion-back.herokuapp.com/placeOrder', {
-  //       method: 'POST',
-  //       headers: {
-  //         'content-type': 'application/json',
-  //       },
-  //       body: JSON.stringify(orderDetail),
-  //     })
-  //       .then((res) => res.json())
-  //       .then((order) => {
-  //         setOrderId(order._id)
-  //         alert('Order Successful!')
-  //         localStorage.removeItem('foodCart')
-  //         setCart(null)
-  //       })
-  //       .catch((err) => console.log(err.message))
-  //   }
+    fetch('http://localhost:5000/placeOrder', {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+      },
+      body: JSON.stringify(orderDetail),
+    })
+      .then((res) => res.json())
+      .then((order) => {
+        setOrderId(order._id)
+        alert('Order Successful!')
+        localStorage.removeItem('foodCart')
+        setCart(null)
+      })
+      .catch((err) => console.log(err.message))
+  }
 
   // const checkoutBtnMarkup = (cart === null) ? (
 
@@ -221,7 +222,7 @@ const FoodMenu = () => {
                   )
                 })}
 
-              {/* {orderId && (
+              {orderId && (
                 <Alert variant="success">
                   Thanks for your order! Your order id: {orderId} <br />
                   Eat Healthy!!
@@ -232,7 +233,7 @@ const FoodMenu = () => {
                 <Elements stripe={stripePromise}>
                   <CheckoutForm handlePlaceOrder={handlePlaceOrder} />
                 </Elements>
-              )} */}
+              )}
             </Col>
           </Row>
         </Container>

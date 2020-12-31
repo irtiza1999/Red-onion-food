@@ -11,15 +11,20 @@ import Auth, {
 import { auth } from 'firebase'
 import NoMatch from './components/NoMatch/NoMatch'
 import FoodMenu from './components/FoodMenu/FoodMenu'
+import Delivery from './components/Delivery/Delivery'
+import PlaceOrder from './components/PlaceOrder/PlaceOrder'
+import NavBar from './components/NavBar/NavBar'
 
 function App() {
   return (
     <AuthContextProvider>
       <div className="App">
         <Router>
-          <Header></Header>
+          <NavBar />
+
           <Switch>
             <Route path="/menu">
+              <Header />
               <FoodMenu />
             </Route>
             <Route path="/login">
@@ -29,7 +34,15 @@ function App() {
               <Signup />
             </Route>
 
+            <PrivateRoute path="/delivery">
+              <Delivery />
+            </PrivateRoute>
+            <PrivateRoute path="/orderplaced">
+              <PlaceOrder />
+            </PrivateRoute>
+
             <Route path="/">
+              <Header />
               <FoodMenu />
             </Route>
             <Route path="*">
