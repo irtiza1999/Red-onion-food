@@ -1,0 +1,21 @@
+.price-span h3 {
+  display: inline;
+  margin-right: 20px;
+}
+
+.quantity-input {
+  width: 50px;
+  border-radius: 5px;
+  margin: 0 5px;
+  text-align: center;
+}
+
+.quantity-plus-btn,
+.quantity-minus-btn {
+  border-radius: 50px;
+}
+
+.food-image {
+  height: 500px;
+  width: 500px;
+}

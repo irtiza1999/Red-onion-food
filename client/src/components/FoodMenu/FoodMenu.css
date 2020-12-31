@@ -1,0 +1,18 @@
+.food-menu {
+  min-height: 600px;
+}
+.food-item-col {
+  margin-bottom: 20px;
+}
+
+.nav {
+  justify-content: center;
+  margin-top: 30px;
+  margin-bottom: 50px;
+}
+
+.nav .nav-item .nav-link:focus {
+  text-decoration: underline;
+  font-size: 18px;
+  color: red;
+}
