@@ -29,7 +29,7 @@
 .banner {
   background: url('../../images/bannerbackground.png');
   background-size: cover;
-  background-position: center;
+  background-repeat: no-repeat;
   height: 500px;
   width: 100%;
 }

@@ -2,10 +2,7 @@ import React from 'react'
 import { FormControl, Button, InputGroup } from 'react-bootstrap'
 import './Header.css'
 
-import { useAuth } from '../Login/useAuth'
 const Header = () => {
-  const auth = useAuth()
-
   return (
     <div>
       <section className="banner">

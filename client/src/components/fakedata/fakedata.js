@@ -1,5 +1,6 @@
 const foods = [
   {
+    key: '1',
     name: 'Healthy Meal Plan',
     shortDescription: 'How we dream about our future',
     longDescription:
@@ -9,6 +10,7 @@ const foods = [
     category: 'Lunch',
   },
   {
+    key: '2',
     name: 'Fried Chicken Bento',
     shortDescription: 'How we dream about our future',
     longDescription:
@@ -18,6 +20,7 @@ const foods = [
     category: 'Lunch',
   },
   {
+    key: '3',
     name: 'Tarragon-Rubbled-Salmon',
     shortDescription: 'How we dream about our future',
     longDescription:
@@ -27,6 +30,7 @@ const foods = [
     category: 'Lunch',
   },
   {
+    key: '4',
     name: 'Indian Lunch',
     shortDescription: 'How we dream about our future',
     longDescription:
@@ -36,6 +40,7 @@ const foods = [
     category: 'Lunch',
   },
   {
+    key: '5',
     name: 'Beef Steak',
     shortDescription: 'How we dream about our future',
     longDescription:
@@ -45,6 +50,7 @@ const foods = [
     category: 'Lunch',
   },
   {
+    key: '6',
     name: 'Honey-Soy-Glazed Salmon with Peppers',
     shortDescription: 'How we dream about our future',
     longDescription:
@@ -54,6 +60,7 @@ const foods = [
     category: 'Lunch',
   },
   {
+    key: '7',
     name: 'Bagel and cream cheese',
     shortDescription: 'How we dream about our future',
     longDescription:
@@ -63,6 +70,7 @@ const foods = [
     category: 'Breakfast',
   },
   {
+    key: '8',
     name: 'Breakfast Sandwich',
     shortDescription: 'How we dream about our future',
     longDescription:
@@ -72,6 +80,7 @@ const foods = [
     category: 'Breakfast',
   },
   {
+    key: '9',
     name: 'Baked Chicken',
     shortDescription: 'How we dream about our future',
     longDescription:
@@ -81,6 +90,7 @@ const foods = [
     category: 'Breakfast',
   },
   {
+    key: '10',
     name: 'Eggs Benedict',
     shortDescription: 'How we dream about our future',
     longDescription:
@@ -90,6 +100,7 @@ const foods = [
     category: 'Breakfast',
   },
   {
+    key: '11',
     name: 'Toast Croissant Fried Egg',
     shortDescription: 'How we dream about our future',
     longDescription:
@@ -99,6 +110,7 @@ const foods = [
     category: 'Breakfast',
   },
   {
+    key: '12',
     name: 'Full Breakfast Fried Egg Toast Brunch',
     shortDescription: 'How we dream about our future',
     longDescription:
@@ -108,6 +120,7 @@ const foods = [
     category: 'Breakfast',
   },
   {
+    key: '13',
     name: 'Salmon with Grape Fruit and Lentil Salad',
     shortDescription: 'How we dream about our future',
     longDescription:
@@ -117,6 +130,7 @@ const foods = [
     category: 'Dinner',
   },
   {
+    key: '14',
     name: 'Lemony Salmon Piccata',
     shortDescription: 'How we dream about our future',
     longDescription:
@@ -126,6 +140,7 @@ const foods = [
     category: 'Dinner',
   },
   {
+    key: '15',
     name: 'Pork Tenderloin With Quinoa Pilaf',
     shortDescription: 'How we dream about our future',
     longDescription:
@@ -135,6 +150,7 @@ const foods = [
     category: 'Dinner',
   },
   {
+    key: '16',
     name: 'French fries with cheese',
     shortDescription: 'How we dream about our future',
     longDescription:
@@ -144,6 +160,7 @@ const foods = [
     category: 'Dinner',
   },
   {
+    key: '17',
     name: 'Garlic Butter Baked Salmon',
     shortDescription: 'How we dream about our future',
     longDescription:
@@ -153,6 +170,7 @@ const foods = [
     category: 'Dinner',
   },
   {
+    key: '18',
     name: 'Baked Chicken',
     shortDescription: 'How we dream about our future',
     longDescription:

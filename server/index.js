@@ -1,7 +1,7 @@
 const express = require('express')
 const MongoClient = require('mongodb').MongoClient
 require('dotenv').config()
-
+const ObjectId = require('mongodb').ObjectID
 const app = express()
 const bodyParser = require('body-parser')
 const cors = require('cors')
@@ -25,15 +25,23 @@ client.connect((err) => {
     .collection('orders')
 
   console.log('connected')
+
   app.get('/foods', (req, res) => {
     foodsCollection.find({}).toArray((err, documents) => {
       res.send(documents)
     })
   })
+
   app.post('/placeOrder', (req, res) => {
     const order = req.body
     ordersCollection.insertOne(order).then((result) => {
       res.send(result.insertedCount > 0)
+    })
+  })
+
+  app.get('/foods/:key', (req, res) => {
+    foodsCollection.find({ key: req.params.key }).toArray((err, documents) => {
+      res.send(documents[0])
     })
   })
 })

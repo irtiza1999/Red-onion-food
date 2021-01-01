@@ -14,6 +14,7 @@ import FoodMenu from './components/FoodMenu/FoodMenu'
 import Delivery from './components/Delivery/Delivery'
 import PlaceOrder from './components/PlaceOrder/PlaceOrder'
 import NavBar from './components/NavBar/NavBar'
+import FoodDetail from './components/FoodDetail/FoodDetail'
 
 function App() {
   return (
@@ -21,32 +22,31 @@ function App() {
       <div className="App">
         <Router>
           <NavBar />
-
           <Switch>
             <Route path="/menu">
-              <Header />
               <FoodMenu />
             </Route>
+
             <Route path="/login">
               <Login />
             </Route>
             <Route path="/signup">
               <Signup />
             </Route>
-
             <PrivateRoute path="/delivery">
               <Delivery />
             </PrivateRoute>
             <PrivateRoute path="/orderplaced">
               <PlaceOrder />
             </PrivateRoute>
-
-            <Route path="/">
-              <Header />
+            <Route exact path="/">
               <FoodMenu />
             </Route>
             <Route path="*">
-              <NoMatch></NoMatch>
+              <NoMatch />
+            </Route>
+            <Route path="foods/:key">
+              <FoodDetail />
             </Route>
           </Switch>
         </Router>

@@ -18,20 +18,27 @@ const NavBar = () => {
 
   return (
     <div>
-      <Navbar bg="light" variant="light">
-        <Navbar.Brand href="/" className="mr-auto">
-          <img src={Logo} className="logo ml-5" alt="logo" />
+      <Navbar bg="light" variant="light" fixed="top">
+        <Navbar.Brand className="mr-auto">
+          <Link to="/menu">
+            {' '}
+            <img src={Logo} className="logo ml-5" alt="logo" />
+          </Link>
         </Navbar.Brand>
         <Nav className="mr-5">
-          <Nav.Link to="/orderplaced">
-            <FontAwesomeIcon icon={faShoppingCart} />
+          <Nav.Link>
+            <Link to="/orderplaced">
+              <FontAwesomeIcon icon={faShoppingCart} />
+            </Link>
           </Nav.Link>
           <Link to="/menu" className="btn my-btn btn-outline-danger">
             Foods
           </Link>
           {auth.user ? (
             <span>
-              <small className="current-username">{auth.user.email}</small>
+              <small className="current-username">
+                <strong>{auth.user.name}</strong>
+              </small>
               <Button
                 variant="danger"
                 className="my-btn"
