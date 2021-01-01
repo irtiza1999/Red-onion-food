@@ -9,9 +9,8 @@ const FoodDetail = (props) => {
   const [quantityCount, setQuantityCount] = useState(1)
   const [currentItemTotalPrice, setCurrentItemTotalPrice] = useState(price)
 
-  // dynamically show images
-  const images = require.context('../../images', true)
-  const imagePath = images(`./${category.toLowerCase()}/${imgName}`)
+  const images = require.context('../../menu', true)
+  const imagePath = images(`./${category.toLowerCase()}/${imgName}`).default
 
   const handleMinusClick = () => {
     if (quantityCount > 1) {
@@ -74,7 +73,7 @@ const FoodDetail = (props) => {
         </Col>
 
         <Col md={6}>
-          <img src={imagePath} alt="Food image" className="food-image" />
+          <img src={imagePath} className="food-image" alt="Food image" />
         </Col>
       </Row>
     </Container>

@@ -9,9 +9,8 @@ const CartItem = (props) => {
   const [currentItemTotalPrice, setCurrentItemTotalPrice] = useState(price)
   const singlePrice = props.singlePrice
 
-  //   //dynamically show images
-  //   const images = require.context('../../images', true)
-  //   const imagePath = images(`./${category.toLowerCase()}/${imgName}`)
+  const images = require.context('../../menu', true)
+  const imagePath = images(`./${category.toLowerCase()}/${imgName}`).default
 
   const handleMinusClick = () => {
     if (quantityCount > 1) {
@@ -48,7 +47,7 @@ const CartItem = (props) => {
     <div className="cart-item">
       <Row>
         <Col md={4}>
-          {/* <img src={imagePath} className="img-thumbnail" alt="thumbnail" /> */}
+          <img src={imagePath} className="img-thumbnail" alt="thumbnail" />
         </Col>
 
         <Col md={4}>

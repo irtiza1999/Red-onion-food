@@ -20,10 +20,20 @@ const client = new MongoClient(uri, {
 })
 client.connect((err) => {
   const foodsCollection = client.db(`red-onion-restaurant`).collection('foods')
+  const ordersCollection = client
+    .db(`red-onion-restaurant`)
+    .collection('orders')
+
   console.log('connected')
   app.get('/foods', (req, res) => {
     foodsCollection.find({}).toArray((err, documents) => {
       res.send(documents)
+    })
+  })
+  app.post('/placeOrder', (req, res) => {
+    const order = req.body
+    ordersCollection.insertOne(order).then((result) => {
+      res.send(result.insertedCount > 0)
     })
   })
 })
