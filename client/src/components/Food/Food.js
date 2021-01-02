@@ -1,11 +1,17 @@
-import React from 'react'
-
+import React, { useState, useEffect } from 'react'
 import './Food.css'
 import { Card } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 
 const Food = (props) => {
-  const { name, shortDescription, price, imgName, category, key } = props.item
+  const {
+    name,
+    shortDescription,
+    price,
+    imgName,
+    category,
+    key: key1,
+  } = props.item
 
   const images = require.context('../../menu', true)
   const imagePath = images(`./${category.toLowerCase()}/${imgName}`).default

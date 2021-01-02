@@ -1,7 +1,7 @@
 import React from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import './App.css'
-import Header from './components/Header/Header'
+
 import Login from './components/Login/Login'
 import Signup from './components/Signup/Signup'
 import Auth, {
@@ -14,7 +14,6 @@ import FoodMenu from './components/FoodMenu/FoodMenu'
 import Delivery from './components/Delivery/Delivery'
 import PlaceOrder from './components/PlaceOrder/PlaceOrder'
 import NavBar from './components/NavBar/NavBar'
-import FoodDetail from './components/FoodDetail/FoodDetail'
 
 function App() {
   return (
@@ -23,10 +22,9 @@ function App() {
         <Router>
           <NavBar />
           <Switch>
-            <Route path="/menu">
+            <Route exact path="/foods">
               <FoodMenu />
             </Route>
-
             <Route path="/login">
               <Login />
             </Route>
@@ -44,9 +42,6 @@ function App() {
             </Route>
             <Route path="*">
               <NoMatch />
-            </Route>
-            <Route path="foods/:key">
-              <FoodDetail />
             </Route>
           </Switch>
         </Router>

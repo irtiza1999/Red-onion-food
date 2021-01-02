@@ -20,8 +20,7 @@ const NavBar = () => {
     <div>
       <Navbar bg="light" variant="light" fixed="top">
         <Navbar.Brand className="mr-auto">
-          <Link to="/menu">
-            {' '}
+          <Link to="/">
             <img src={Logo} className="logo ml-5" alt="logo" />
           </Link>
         </Navbar.Brand>
@@ -31,9 +30,6 @@ const NavBar = () => {
               <FontAwesomeIcon icon={faShoppingCart} />
             </Link>
           </Nav.Link>
-          <Link to="/menu" className="btn my-btn btn-outline-danger">
-            Foods
-          </Link>
           {auth.user ? (
             <span>
               <small className="current-username">

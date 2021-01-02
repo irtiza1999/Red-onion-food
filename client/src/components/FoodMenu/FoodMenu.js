@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom'
 import { Nav, Row, Col, Container, Button, Alert } from 'react-bootstrap'
 import Food from '../Food/Food'
 import './FoodMenu.css'
+import FoodDetail from '../FoodDetail/FoodDetail'
 import Delivery from '../Delivery/Delivery'
 import CartItem from '../CartItem/CartItem'
 import { Elements } from '@stripe/react-stripe-js'
@@ -11,8 +11,6 @@ import CheckoutForm from '../Payment/CheckoutForm'
 import Login from '../Login/Login'
 import { useAuth } from '../Login/useAuth'
 import Header from '../Header/Header'
-import FoodDetail from '../FoodDetail/FoodDetail'
-import fakeData from '../fakedata/fakedata'
 
 const FoodMenu = () => {
   const [allItems, setAllItems] = useState([])
@@ -23,7 +21,7 @@ const FoodMenu = () => {
   const [deliveryInfoSubmit, setDeliveryInfoSubmit] = useState(false)
   const [deliveryInformation, setDeliveryInformation] = useState(null)
   const [orderId, setOrderId] = useState(null)
-  const [handlePlaceOrderState, setHandlePlaceOrderState] = useState(false)
+
   const auth = useAuth()
 
   const stripePromise = loadStripe(
@@ -31,7 +29,6 @@ const FoodMenu = () => {
   )
 
   // load data
-
   useEffect(() => {
     fetch('http://localhost:5000/foods')
       .then((res) => res.json())
@@ -44,17 +41,6 @@ const FoodMenu = () => {
 
       .catch((err) => console.log(err))
   }, [])
-
-  // const [foodById, setFoodById] = useState({})
-  // const { key } = useParams()
-  // useEffect(() => {
-  //   fetch('http://localhost:5000/foods/:' + key)
-  //     // .then((res) => res.json())
-  //     .then((data) => {
-  //       setFoodById(data)
-  //     })
-  //     .catch((err) => console.log('data1', err))
-  // }, [key])
 
   useEffect(() => {
     handleSelection('Breakfast')
@@ -94,9 +80,6 @@ const FoodMenu = () => {
   const handleCheckout = () => {
     if (checkedOut) setCheckedOut(false)
     else setCheckedOut(true)
-
-    // const currentCart = localStorage.getItem('foodCart');
-    // if(currentCart) setCart([...currentCart]);
   }
 
   const handleDeliveryInfoSubmit = (deliveryInfo) => {
@@ -128,14 +111,9 @@ const FoodMenu = () => {
         alert('Order Successful!')
         localStorage.removeItem('foodCart')
         setCart(null)
-        setHandlePlaceOrderState(true)
       })
       .catch((err) => console.log(err.message))
   }
-
-  // const checkoutBtnMarkup = (cart === null) ? (
-
-  //                             ):
 
   return (
     <>
@@ -173,18 +151,18 @@ const FoodMenu = () => {
                         handleCurrentSelectedItem(item)
                       }}
                     >
-                      <Food
-                        item={item}
-                        food={currentSelectedItem}
-                        addToCart={addToCart}
-                        removeFromCart={removeFromCart}
-                      />
+                      <Food item={item} />
                     </Col>
                   )
                 })}
 
-              {currentSelectedItem &&
-                (window.location.pathname = `/foods/${currentSelectedItem.key}`)}
+              {currentSelectedItem && (
+                <FoodDetail
+                  food={currentSelectedItem}
+                  addToCart={addToCart}
+                  removeFromCart={removeFromCart}
+                />
+              )}
             </Row>
 
             {cart.length > 0 && (
@@ -215,50 +193,60 @@ const FoodMenu = () => {
                 md={12}
                 style={{ display: deliveryInfoSubmit ? 'block' : 'none' }}
               >
-                <h3>Cart</h3>
-                <hr />
-                {deliveryInfoSubmit && !orderId && (
-                  <div>
-                    <h4>From: KFC</h4>
-                    <h5>Arriving in: 20-30 min</h5>
-                    <h6>Customer Name: {deliveryInformation.name} </h6>
-                    <h6>Customer Address: {deliveryInformation.address}</h6>
-                    <h6>Mobile No.: {deliveryInformation.mobile}</h6>
-                    <hr />
-                    <br />
+                {
+                  <div className="row">
+                    <div className="col-md-6">
+                      <h3>Cart</h3>
+                      {cart &&
+                        cart.map((item) => {
+                          const singleItemPrice = allItems.find(
+                            (i) => i.id === item.id
+                          ).price
+                          return (
+                            <CartItem
+                              item={item}
+                              singlePrice={singleItemPrice}
+                              addToCart={addToCart}
+                              removeFromCart={removeFromCart}
+                            />
+                          )
+                        })}
+                    </div>
+
+                    <div className="col-md-6">
+                      {deliveryInfoSubmit && !orderId && (
+                        <div>
+                          <h4>From: KFC</h4>
+                          <h5>Arriving in: 20-30 min</h5>
+                          <h6>Customer Name: {deliveryInformation.name} </h6>
+                          <h6>
+                            Customer Address: {deliveryInformation.address}
+                          </h6>
+                          <h6>Mobile No.: {deliveryInformation.mobile}</h6>
+                          <hr />
+                          <br />
+                        </div>
+                      )}
+                    </div>
+                    <div className="col-md-12">
+                      {deliveryInfoSubmit && !orderId && (
+                        <Elements stripe={stripePromise}>
+                          <CheckoutForm handlePlaceOrder={handlePlaceOrder} />
+                        </Elements>
+                      )}
+                    </div>
                   </div>
-                )}
-                {cart &&
-                  cart.map((item) => {
-                    const singleItemPrice = allItems.find(
-                      (i) => i.id === item.id
-                    ).price
-                    return (
-                      <CartItem
-                        item={item}
-                        singlePrice={singleItemPrice}
-                        addToCart={addToCart}
-                        removeFromCart={removeFromCart}
-                      />
-                    )
-                  })}
-
+                }
                 {orderId && (
-                  <Alert variant="success">
-                    Thanks for your order! Your order id: {orderId} <br />
-                    Eat Healthy!!
-                  </Alert>
+                  <>
+                    <Alert variant="success">
+                      Thanks for your order! Your order id: {orderId} <br />
+                      Eat Healthy!!
+                    </Alert>
+                    {(window.location.pathname = '/')}
+                  </>
                 )}
-
-                {deliveryInfoSubmit && !orderId && (
-                  <Elements stripe={stripePromise}>
-                    <CheckoutForm handlePlaceOrder={handlePlaceOrder} />
-                  </Elements>
-                )}
-                {handlePlaceOrderState &&
-                  (window.location.pathname = '/orderplaced')}
-              </Col>{' '}
-              */}
+              </Col>
             </Row>
           </Container>
         )}

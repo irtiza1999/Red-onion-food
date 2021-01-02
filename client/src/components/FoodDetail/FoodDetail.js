@@ -1,25 +1,11 @@
-import React, { useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom'
+import React, { useState, useContext } from 'react'
 import { Button, Container, Row, Col } from 'react-bootstrap'
 import './FoodDetail.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCartPlus } from '@fortawesome/free-solid-svg-icons'
 
 const FoodDetail = (props) => {
-  const { key } = useParams()
-  const [foodById, setFoodById] = useState({})
-
-  useEffect(() => {
-    fetch('http://localhost:5000/foods/' + key)
-      .then((res) => res.json())
-      .then((data) => {
-        setFoodById(data)
-        console.log('data2 ', data)
-      })
-  }, [key])
-  const { name, longDescription, price, imgName, category } = foodById
-  console.log(foodById)
-
+  const { name, longDescription, price, imgName, category } = props.food
   const [quantityCount, setQuantityCount] = useState(1)
   const [currentItemTotalPrice, setCurrentItemTotalPrice] = useState(price)
 
@@ -71,6 +57,7 @@ const FoodDetail = (props) => {
           <br />
           <br />
           <br />
+
           <Button
             className="my-btn"
             variant="outline-danger"
@@ -87,7 +74,7 @@ const FoodDetail = (props) => {
         </Col>
 
         <Col md={6}>
-          <img src={imagePath} alt="FoodImage" className="food-image" />
+          <img src={imagePath} alt="Food image" className="food-image" />
         </Col>
       </Row>
     </Container>
