@@ -30,7 +30,7 @@ const FoodMenu = () => {
 
   // load data
   useEffect(() => {
-    fetch('http://localhost:5000/foods')
+    fetch('https://redonionserver.herokuapp.com/foods')
       .then((res) => res.json())
       .then((data) => {
         setAllItems(data)
@@ -98,7 +98,7 @@ const FoodMenu = () => {
       payment: payment,
     }
 
-    fetch('http://localhost:5000/placeOrder', {
+    fetch('https://redonionserver.herokuapp.com/placeOrder', {
       method: 'POST',
       headers: {
         'content-type': 'application/json',
