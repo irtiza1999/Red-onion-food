@@ -22,6 +22,7 @@ Red onion food is a simple food delivary website. Where uses can order their foo
 * Bootstrap
 * React Bootstrap
 * React router
+* Stripe JS
 
 #### Backend
 * ExpressJS
